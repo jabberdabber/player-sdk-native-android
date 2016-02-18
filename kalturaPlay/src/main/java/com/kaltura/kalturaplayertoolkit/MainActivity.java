@@ -68,10 +68,27 @@ public class MainActivity extends Activity implements LoginFragment.OnFragmentIn
         if (extras == null) {
             extras = new Bundle();
         }
+        //KPPlayerConfig config = new KPPlayerConfig("http://192.168.160.195/html5.kaltura/mwEmbed/mwEmbedFrame.php", "15128121", "1091").setEntryId("0_vpdvoc48");
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33460501", "2068231").setEntryId("1_y62mh1hl");
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33189171", "2068231").setEntryId("1_az42om7s");
 
-        KPPlayerConfig config = new KPPlayerConfig("http://192.168.160.195/html5.kaltura/mwEmbed/mwEmbedFrame.php", "15128121", "1091").setEntryId("0_vpdvoc48");
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "12905712", "243342").setEntryId("0_uka1msg4"); // COFFEE
+        //JW = KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33502041", "2068231").setEntryId("1_jnlsx5nv");
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33502041", "2068231").setEntryId("1_6q4u0wxw");
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_qnsmpr3i"); //LIVE
+        //KPPlayerConfig config = new KPPlayerConfig("http://192.168.160.202/html5.kaltura/mwEmbed/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
+
+        KPPlayerConfig config = new KPPlayerConfig("http://player-227562931.eu-west-1.elb.amazonaws.com/v2.38.rc16/mwEmbed/mwEmbedFrame.php", "8413352", "1774581").setEntryId("1_mphei4ku"); //ITAN1
+
+
+        config.setEntryId("258656");//assetId
+        config.addConfig("mediaProxy.mediaPlayFrom", "" + 0);
+        config.addConfig("autoPlay", ""+true);
+
         config.addConfig("EmbedPlayer.ShowPosterOnStop", "false");
-//        config.addConfig("Kaltura.LeadHLSOnAndroid", "true");
+        config.addConfig("closedCaptions.displayCaptions", "true");
+        //config.addConfig("Kaltura.LeadHLSOnAndroid", "true");
 //        config.addConfig("doubleClick.plugin", "false");
 //        config.addConfig("doubleClick.path", "http://cdnbakmi.kaltura.com/content/uiconf/ps/veria/kdp3.9.1/plugins/doubleclickPlugin.swf");
 //        config.addConfig("doubleClick.adTagUrl", "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=[timestamp]");

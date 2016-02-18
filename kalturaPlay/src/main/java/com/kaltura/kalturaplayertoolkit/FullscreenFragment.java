@@ -155,6 +155,14 @@ public class FullscreenFragment extends Fragment{
             }
         });
 
+//        mPlayerView.setCustomSourceURLProvider(new PlayerViewController.SourceURLProvider() {
+//            @Override
+//            public String getURL(String entryId, String currentURL) {
+//                return "http://cdnapi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/0_uka1msg4/flavorIds/1_vqhfu6uy,1_80sohj7p,1_ry9w1l0b/format/applehttp/protocol/http/a.m3u8";
+//                //return "http://cfvod.kaltura.com/scf/fhls/p/243342/sp/24334200/serveFlavor/entryId/0_uka1msg4/v/1/pv/1/flavorId/1_vqhfu6uy/name/a.mp4/index.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cDovL2Nmdm9kLmthbHR1cmEuY29tL3NjZi9maGxzL3AvMjQzMzQyL3NwLzI0MzM0MjAwL3NlcnZlRmxhdm9yL2VudHJ5SWQvMF91a2ExbXNnNC92LzEvcHYvMS9mbGF2b3JJZC8xXyoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE0NTU1MjU1ODF9fX1dfQ__&Signature=SeEvTkFoIEMCuBCqElROXSEofeGAEeiOvM93-BBFg1NE3r7zcHcTV~Ap1O-yIFUE37RFefQ6RLKnJR~j-Gcl6sCICup6tKAZzSXBvsRmxgJxBdbQ1KLVIImd~NhKFTytxpQxejYOrLelDJX86X7XoNT4gg0avQbMY1vSXLhTZfga47g47NZYAdH8tO-Gn-TN0EcMMjFGXKSlg1DyZAmQt0LmY1UPiUBtC4t7OAQET~iQy6hpQBEFT4lscHC5Ha6qPWK1S0O84McTGk6vMVPZfEd-MiqnxugSqhTWNig5LXHbfj--MgeyUetFTdb05lao5wiuh8UAUz1TG42fsbWx6A__&Key-Pair-Id=APKAJT6QIWSKVYK3V34A";
+//            }
+//        });
+
         showPlayerView();
         Bundle bundle = getArguments();
         KPPlayerConfig config = null;

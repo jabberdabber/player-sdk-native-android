@@ -40,5 +40,6 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.2'
+   // compile project(':exoplayer')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
