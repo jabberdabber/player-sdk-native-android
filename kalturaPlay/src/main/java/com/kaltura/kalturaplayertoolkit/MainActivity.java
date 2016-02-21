@@ -68,6 +68,8 @@ public class MainActivity extends Activity implements LoginFragment.OnFragmentIn
         if (extras == null) {
             extras = new Bundle();
         }
+
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "20540612", "243342").setEntryId("1_sf5ovm7u");        extras.putSerializable("config", config);
         //KPPlayerConfig config = new KPPlayerConfig("http://192.168.160.195/html5.kaltura/mwEmbed/mwEmbedFrame.php", "15128121", "1091").setEntryId("0_vpdvoc48");
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33460501", "2068231").setEntryId("1_y62mh1hl");
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33189171", "2068231").setEntryId("1_az42om7s");

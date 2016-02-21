@@ -100,6 +100,12 @@ public class KPlayerController implements KPlayerCallback, ContentProgressProvid
         this.parentViewController.addView((View)this.player, parentViewController.getChildCount() - 1, lp);
     }
 
+    public void replacePlayer() {
+        ViewGroup.LayoutParams currLP = this.parentViewController.getLayoutParams();
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(currLP.width, currLP.height);
+        this.parentViewController.addView((View)this.player, 1, lp);
+    }
+
     public void play() {
         if (isIMAActive) {
             return;
@@ -210,28 +216,34 @@ public class KPlayerController implements KPlayerCallback, ContentProgressProvid
             return;
         }
 
-        if (this.src != null) {
-            return;
-        }
-
         Context context = parentViewController.getContext();
+        boolean shouldReplacePlayer = false;
+        if (this.player != null) {
+            parentViewController.removeView((View)this.player);
+            this.player.removePlayer();
+            shouldReplacePlayer = true;
+        }
 
         // maybe change player
         String path = Uri.parse(src).getPath();
-        if (path.endsWith(".wvm")) {
+        if (path.endsWith(".m3u8")) {
+            // HLS
+            this.player = new KHLSPlayer(context);
+        } else if (path.endsWith(".wvm")) {
             // Widevine Classic
             this.player = new KWVCPlayer(context);
         } else {
             this.player = new com.kaltura.playersdk.players.KExoPlayer(context);
         }
-
-        addPlayerToController();
+        if (shouldReplacePlayer) {
+            replacePlayer();
+        } else {
+            addPlayerToController();
+        }
         this.player.setPlayerListener(playerListener);
         this.player.setPlayerCallback(this);
         this.src = src;
         this.player.setPlayerSource(src);
-
-
     }
 
     public void setLicenseUri(String uri) {
@@ -324,6 +336,7 @@ public class KPlayerController implements KPlayerCallback, ContentProgressProvid
                 break;
             case KPlayerCallback.SHOULD_PLAY:
                 isIMAActive = false;
+                player.setShouldCancelPlay(false);
                 player.play();
                 break;
             case KPlayerCallback.SHOULD_PAUSE:

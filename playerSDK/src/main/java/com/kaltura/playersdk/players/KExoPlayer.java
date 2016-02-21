@@ -68,6 +68,7 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
     private KPlayerExoDrmCallback mDrmCallback;
     private VideoSurfaceView mSurfaceView;
     private boolean mSeeking;
+    private boolean mBuffering = false;
 
     public static Set<MediaFormat> supportedFormats(Context context) {
         Set<MediaFormat> set = new HashSet<>();
@@ -251,10 +252,6 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
             mSavedState.position = 0;
         }
 
-        if (isPlaying()) {
-            mPlayerListener.eventWithValue(this, KPlayerListener.PlayKey, null);
-        }
-
         startPlaybackTimeReporter();
     }
     
@@ -263,7 +260,6 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
         stopPlaybackTimeReporter();
         if (this.isPlaying() && mExoPlayer != null) {
             setPlayWhenReady(false);
-            mPlayerListener.eventWithValue(this, KPlayerListener.PauseKey, null);
         }
     }
     
@@ -349,8 +345,17 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
             case ExoPlayer.STATE_PREPARING:
                 break;
             case ExoPlayer.STATE_BUFFERING:
+                mPlayerListener.eventWithValue(this, KPlayerListener.BufferingChangeKey, "true");
+                mBuffering = true;
                 break;
             case ExoPlayer.STATE_READY:
+                if (mBuffering) {
+                    mPlayerListener.eventWithValue(this, KPlayerListener.BufferingChangeKey, "false");
+                    mBuffering = false;
+                }
+                if (mReadiness == Readiness.Ready && !playWhenReady) {
+                    mPlayerListener.eventWithValue(this, KPlayerListener.PauseKey, null);
+                }
                 // ExoPlayer is ready.
                 if (mReadiness != Readiness.Ready) {
                     mReadiness = Readiness.Ready;
@@ -372,6 +377,10 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
                     mPlayerListener.eventWithValue(this, KPlayerListener.SeekedKey, null);
                     mSeeking = false;
                     startPlaybackTimeReporter();
+                }
+
+                if (playWhenReady) {
+                    mPlayerListener.eventWithValue(this, KPlayerListener.PlayKey, null);
                 }
                 break;
 

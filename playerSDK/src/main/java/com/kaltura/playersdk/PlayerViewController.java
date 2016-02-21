@@ -235,6 +235,12 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
         }
     }
 
+    public void changeConfiguration(KPPlayerConfig config) {
+        if (config != null) {
+            mWebView.loadUrl(config.getVideoURL() + "#" + buildSupportedMediaFormats());
+        }
+    }
+
     public void removeEventListener(KPEventListener listener) {
         if (listener != null && eventListeners != null && eventListeners.contains(listener)) {
             eventListeners.remove(listener);
@@ -449,7 +455,7 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
             this.addView(mWebView, wvLp);
             
         }
-        
+
         iframeUrl += "#" + buildSupportedMediaFormats();
 
         if( mIframeUrl == null || !mIframeUrl.equals(iframeUrl) ) {
@@ -669,13 +675,13 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
             @Override
             public void handler() {
                 if (mPlayerEventsHash == null) {
-                    mPlayerEventsHash = new HashMap<String, ArrayList<HashMap<String,EventListener>>>();
+                    mPlayerEventsHash = new HashMap();
                 }
-                ArrayList<HashMap<String, EventListener>> listenerArr = (ArrayList<HashMap<String, EventListener>>)mPlayerEventsHash.get(event);
+                ArrayList<HashMap<String, EventListener>> listenerArr = (ArrayList)mPlayerEventsHash.get(event);
                 if (listenerArr == null) {
-                    listenerArr = new ArrayList<HashMap<String, EventListener>>();
+                    listenerArr = new ArrayList();
                 }
-                HashMap<String, EventListener> addedEvent = new HashMap<String, EventListener>();
+                HashMap<String, EventListener> addedEvent = new HashMap();
                 addedEvent.put(eventID, listener);
                 listenerArr.add(addedEvent);
                 mPlayerEventsHash.put(event, listenerArr);
@@ -770,7 +776,6 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
                     this.playerController.setLocale(attributeValue);
                     break;
                 case doubleClickRequestAds:
-//                    attributeValue = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=]";
                     playerController.initIMA(attributeValue, mActivity);
                     break;
                 case goLive:
