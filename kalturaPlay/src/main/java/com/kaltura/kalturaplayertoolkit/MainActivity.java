@@ -74,12 +74,12 @@ public class MainActivity extends Activity implements LoginFragment.OnFragmentIn
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33460501", "2068231").setEntryId("1_y62mh1hl");
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33189171", "2068231").setEntryId("1_az42om7s");
 
-        KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "12905712", "243342").setEntryId("0_uka1msg4"); // COFFEE
+        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "12905712", "243342").setEntryId("0_uka1msg4"); // COFFEE
         //JW = KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33502041", "2068231").setEntryId("1_jnlsx5nv");
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "33502041", "2068231").setEntryId("1_6q4u0wxw");
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_qnsmpr3i"); //LIVE
         //KPPlayerConfig config = new KPPlayerConfig("http://192.168.160.202/html5.kaltura/mwEmbed/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
-        //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
+        KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
 /*
         KPPlayerConfig config = new KPPlayerConfig("http://player-227562931.eu-west-1.elb.amazonaws.com/v2.38.rc16/mwEmbed/mwEmbedFrame.php", "8413352", "1774581").setEntryId("1_mphei4ku"); //ITAN1
         config.setEntryId("258656");//assetId
