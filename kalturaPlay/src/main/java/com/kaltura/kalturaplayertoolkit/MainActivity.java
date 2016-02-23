@@ -80,12 +80,7 @@ public class MainActivity extends Activity implements LoginFragment.OnFragmentIn
         //KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_qnsmpr3i"); //LIVE
         //KPPlayerConfig config = new KPPlayerConfig("http://192.168.160.202/html5.kaltura/mwEmbed/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
         KPPlayerConfig config = new KPPlayerConfig("http://kgit.html5video.org/branches/master/mwEmbedFrame.php", "28013271", "1878761").setEntryId("1_k64id08u"); //LIVE DVR
-/*
-        KPPlayerConfig config = new KPPlayerConfig("http://player-227562931.eu-west-1.elb.amazonaws.com/v2.38.rc16/mwEmbed/mwEmbedFrame.php", "8413352", "1774581").setEntryId("1_mphei4ku"); //ITAN1
-        config.setEntryId("258656");//assetId
-        config.addConfig("mediaProxy.mediaPlayFrom", "" + 0);
-        config.addConfig("autoPlay", ""+true);
-*/
+
         config.addConfig("EmbedPlayer.ShowPosterOnStop", "false");
         config.addConfig("closedCaptions.displayCaptions", "true");
         //config.addConfig("Kaltura.LeadHLSOnAndroid", "true");
