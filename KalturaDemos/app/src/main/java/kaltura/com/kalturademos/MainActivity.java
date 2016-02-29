@@ -3,8 +3,9 @@ package kaltura.com.kalturademos;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -154,7 +155,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(R.id.replay).setVisibility(View.VISIBLE);
         } else if (state == KPlayerState.PLAYING) {
             findViewById(R.id.replay).setVisibility(View.INVISIBLE);
+        } else if (state == KPlayerState.ENDED) {
+            Log.e("StateChanged", "RECIVED KPlayerState.ENDED");
         }
+
     }
 
     @Override

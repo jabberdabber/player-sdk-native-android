@@ -348,6 +348,13 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
                 if (mBuffering) {
                     mPlayerListener.eventWithValue(this, KPlayerListener.BufferingChangeKey, "false");
                     mBuffering = false;
+                    if (this.getDuration() == this.getCurrentPlaybackTime()) {
+                        Log.d(TAG, "state ended by seek to end");
+                        if (mExoPlayer != null) {
+                            break;
+                        }
+                    }
+
                 }
                 if (mReadiness == Readiness.Ready && !playWhenReady) {
                     mPlayerListener.eventWithValue(this, KPlayerListener.PauseKey, null);
@@ -375,19 +382,12 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
                 break;
 
             case ExoPlayer.STATE_ENDED:
-                Log.d(TAG, "state ended");
+                Log.d(TAG, "state ended, set play when ready false");
                 if (mExoPlayer != null) {
-                    Log.d(TAG, "state ended: set play when ready false");
-                    setPlayWhenReady(false);
+                    mPlayerListener.eventWithValue(this, KPlayerListener.PauseKey, null);
                 }
-                if (mExoPlayer != null) {
-                    Log.d(TAG, "state ended: seek to 0");
-                    setCurrentPlaybackTime(0);
-                }
-                if (playWhenReady) {
-                    mPlayerListener.contentCompleted(this);
-                    mPlayerCallback.playerStateChanged(KPlayerCallback.ENDED);
-                } 
+                mPlayerListener.contentCompleted(this);
+                setPlayWhenReady(false);
                 stopPlaybackTimeReporter();
                 break;
         }
