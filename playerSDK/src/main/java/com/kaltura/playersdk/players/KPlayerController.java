@@ -288,7 +288,7 @@ public class KPlayerController implements KPlayerCallback, ContentProgressProvid
     }
 
     public float getCurrentPlaybackTime() {
-        return this.player.getCurrentPlaybackTime();
+        return (this.player != null) ? this.player.getCurrentPlaybackTime() : 0;
     }
 
     public void setCurrentPlaybackTime(float currentPlaybackTime) {
