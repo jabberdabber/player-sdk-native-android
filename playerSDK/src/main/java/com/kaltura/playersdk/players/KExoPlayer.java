@@ -390,7 +390,6 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
             case ExoPlayer.STATE_ENDED:
                 Log.d(TAG, "state ended");
                 if (mExoPlayer != null) {
-                    Log.d(TAG, "state ended: seek to 10");
                     mPlayerListener.eventWithValue(this, KPlayerListener.PauseKey, null);
                 }
 
