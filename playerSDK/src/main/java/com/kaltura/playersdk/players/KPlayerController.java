@@ -58,8 +58,7 @@ public class KPlayerController implements KPlayerCallback, ContentProgressProvid
     @Override
     public void contentCompleted(KPlayer currentPlayer) {
         if (!isIMAActive) {
-            float num = (getCurrentPlaybackTime() > getDuration()) ? getDuration() : 0f;
-            player.setCurrentPlaybackTime((long)num * 1000);
+            player.setCurrentPlaybackTime(0);
             playerListener.eventWithValue(player, KPlayerListener.EndedKey, null);
         } else if (currentPlayer == null) {
             isIMAActive = false;

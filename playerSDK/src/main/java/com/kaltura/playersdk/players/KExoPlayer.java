@@ -283,7 +283,7 @@ public class KExoPlayer extends FrameLayout implements KPlayer, ExoplayerWrapper
         if (mExoPlayer != null) {
             mSavedState.set(isPlaying(), getCurrentPlaybackTime());
         } else {
-            mSavedState.set(false, 10);
+            mSavedState.set(false, 0);
         }
     }
 
