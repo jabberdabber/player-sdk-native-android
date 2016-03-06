@@ -124,19 +124,36 @@ public class KWVCPlayer
 
     @Override
     public long getCurrentPlaybackTime() {
-        return mPlayer != null ? mPlayer.getCurrentPosition() : 0;
+        return (mPlayer != null) ? mPlayer.getCurrentPosition() : 0;
     }
     
     @Override
     public void setCurrentPlaybackTime(long currentPlaybackTime) {
         if (mPlayer != null) {
+            Log.d(TAG, "setCurrentPlaybackTime: " + currentPlaybackTime + "/" + getDuration());
+            if (currentPlaybackTime >= getDuration()){
+                currentPlaybackTime = getDuration();
+            }
+            mPlayer.seekTo((int) (currentPlaybackTime));
+            if (currentPlaybackTime  ==  getDuration()) {
+                mListener.eventWithValue(this, KPlayerListener.SeekedKey, null);
+                mListener.eventWithValue(this, "playbackComplete", null);
+                mListener.eventWithValue(this, "onEndedDone", null);
+                mListener.contentCompleted(KWVCPlayer.this);
+            }
+            else if (currentPlaybackTime  ==  0 &&  getDuration() < 0) {
+                mListener.eventWithValue(this, KPlayerListener.PauseKey, null);
+            }
+            else{
+                mPlayer.seekTo((int) (currentPlaybackTime));
+            }
             mPlayer.seekTo((int) (currentPlaybackTime));
         }
     }
 
     @Override
     public long getDuration() {
-        return mPlayer != null ? mPlayer.getDuration() : 0;
+        return (mPlayer != null) ? mPlayer.getDuration() : 0;
     }
 
     @Override
@@ -189,7 +206,14 @@ public class KWVCPlayer
 
     @Override
     public void freezePlayer() {
-
+        saveState();
+        if (mPlayer != null) {
+            mPlayer.suspend();
+        }
+        if (mPlayheadTracker != null) {
+            mPlayheadTracker.stop();
+            mPlayheadTracker = null;
+        }
     }
 
     private void saveState() {
@@ -215,9 +239,11 @@ public class KWVCPlayer
         mPrepareState = PrepareState.NotPrepared;
     }
 
-    @Override
     public void recoverPlayer() {
-        
+        if (mPlayer != null) {
+            mPlayer.resume();
+            play();
+        }
     }
 
     @Override
@@ -248,8 +274,10 @@ public class KWVCPlayer
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
+                Log.d(TAG, "onCompletion");
+                mListener.eventWithValue(KWVCPlayer.this, "playbackComplete", null);
+                mListener.eventWithValue(KWVCPlayer.this, "onEndedDone", null);
                 mListener.contentCompleted(KWVCPlayer.this);
-                mCallback.playerStateChanged(KPlayerCallback.ENDED);
             }
         });
         mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
@@ -281,8 +309,17 @@ public class KWVCPlayer
                 mp.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
                     @Override
                     public void onSeekComplete(MediaPlayer mp) {
+                        Log.d(TAG, mp.getCurrentPosition() + "/" + getDuration());
                         saveState();
-                        mListener.eventWithValue(kplayer, KPlayerListener.SeekedKey, null);
+                        if ((mp.getCurrentPosition() == 0 ) && getDuration() > 0){
+                            mListener.eventWithValue(kplayer, KPlayerListener.CanPlayKey, null);
+                        }
+                        else if (mp.getCurrentPosition()  !=  getDuration()) {
+                            mListener.eventWithValue(kplayer, KPlayerListener.SeekedKey, null);
+                        } else {
+                            mListener.eventWithValue(kplayer, KPlayerListener.EndedKey, null);
+                        }
+
                     }
                 });
 
