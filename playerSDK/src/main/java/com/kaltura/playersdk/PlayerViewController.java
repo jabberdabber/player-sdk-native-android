@@ -600,6 +600,7 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
 
     @Override
     public void handleHtml5LibCall(String functionName, int callbackId, String args) {
+        Log.d(TAG, "handleHtml5LibCall functionName: " + functionName + " args: " + args);
         Method bridgeMethod = KStringUtilities.isMethodImplemented(this, functionName);
         Object object = this;
         if (bridgeMethod == null) {
@@ -628,7 +629,7 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
     //
     @Override
     public void eventWithValue(KPlayer player, String eventName, String eventValue) {
-        Log.d("EventWithValue", "Name: " + eventName + " Value: " + eventValue);
+        Log.d(TAG, "EventWithValue Name: " + eventName + " Value: " + eventValue);
         KStringUtilities event = new KStringUtilities(eventName);
         if (eventListeners != null) {
             for (KPEventListener listener : eventListeners) {
@@ -645,7 +646,7 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
 
     @Override
     public void eventWithJSON(KPlayer player, String eventName, String jsonValue) {
-        Log.d("EventWithJSON", "Name: " + eventName + " Value: " + jsonValue);
+        Log.d(TAG, "EventWithJSON Name: " + eventName + " Value: " + jsonValue);
         this.mWebView.triggerEventWithJSON(eventName, jsonValue);
     }
 
@@ -877,7 +878,7 @@ public class PlayerViewController extends RelativeLayout implements KControlsVie
         JSONArray jsonArgs = null;
         try {
             decodeArgs = URLDecoder.decode(args, "UTF-8");
-            Log.d(getClass().getSimpleName(), "sendCCRecieverMessage : " + decodeArgs);
+            Log.d(TAG,  getClass().getSimpleName() + " sendCCRecieverMessage : " + decodeArgs);
             jsonArgs = new JSONArray(decodeArgs);
             getRouterManager().sendMessage(jsonArgs.getString(0), jsonArgs.getString(1));
         } catch (Exception e) {
