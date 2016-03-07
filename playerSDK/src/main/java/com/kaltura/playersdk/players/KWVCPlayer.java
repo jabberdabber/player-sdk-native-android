@@ -243,7 +243,10 @@ public class KWVCPlayer
     public void recoverPlayer() {
         if (mPlayer != null) {
             mPlayer.resume();
-            play();
+            mPlayer.seekTo(mSavedState.position);
+            if (mSavedState.playing) {
+                play();
+            }
         }
     }
 
@@ -327,7 +330,8 @@ public class KWVCPlayer
                 mp.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
                     @Override
                     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                        mListener.eventWithValue(KWVCPlayer.this, KPlayerListener.BufferingChangeKey, percent < 100 ? "true" : "false");
+                        Log.d(TAG, "onBufferingUpdate percent= " + percent);
+                        mListener.eventWithValue(KWVCPlayer.this, KPlayerListener.BufferingChangeKey, (percent < 100) ? "true" : "false");
                     }
                 });
 
