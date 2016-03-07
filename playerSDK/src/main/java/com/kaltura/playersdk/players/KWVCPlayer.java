@@ -239,6 +239,7 @@ public class KWVCPlayer
         mPrepareState = PrepareState.NotPrepared;
     }
 
+    @Override
     public void recoverPlayer() {
         if (mPlayer != null) {
             mPlayer.resume();
